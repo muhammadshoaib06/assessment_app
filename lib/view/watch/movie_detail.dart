@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:assessment_app/controller/cubits/movie_detail_cubit/movie_detail_cubit.dart';
 import 'package:assessment_app/controller/data_controller/movies_controller.dart';
 import 'package:assessment_app/utils/app_colors.dart';
+import 'package:assessment_app/view/watch/tickets/select_seats.dart';
 import 'package:assessment_app/view/watch/widgets/watch_movie_trailer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -147,7 +148,11 @@ class _MovieDetailState extends State<MovieDetail> {
                         SizedBox(height: 16.sp),
 
                         /// Get Tickets Button
-                        const GetTicketButtonWidget(),
+                        GetTicketButtonWidget(
+                          movieName: MoviesController.movieDetailModel!.title,
+                          releaseDate: DateFormat.yMMMMd().format(
+                              MoviesController.movieDetailModel!.releaseDate),
+                        ),
 
                         /// Watch Trailer
                         const WatchTrailerButtonWidget(),
@@ -213,28 +218,44 @@ class _MovieDetailState extends State<MovieDetail> {
 class GetTicketButtonWidget extends StatelessWidget {
   const GetTicketButtonWidget({
     super.key,
+    required this.movieName,
+    required this.releaseDate,
   });
+
+  final String movieName;
+  final String releaseDate;
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        width: 243.sp,
-        height: 50.sp,
-        decoration: ShapeDecoration(
-          color: const Color(0xFF61C3F2),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+      child: GestureDetector(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SelectSeats(
+              movieName: movieName,
+              releaseDate: releaseDate,
+            ),
           ),
         ),
-        child: Center(
-          child: Text(
-            'Get Tickets',
-            style: GoogleFonts.poppins(
-              color: Colors.white,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 0.20,
+        child: Container(
+          width: 243.sp,
+          height: 50.sp,
+          decoration: ShapeDecoration(
+            color: const Color(0xFF61C3F2),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          child: Center(
+            child: Text(
+              'Get Tickets',
+              style: GoogleFonts.poppins(
+                color: Colors.white,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.20,
+              ),
             ),
           ),
         ),
