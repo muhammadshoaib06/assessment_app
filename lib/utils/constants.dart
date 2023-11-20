@@ -1,0 +1,4 @@
+class Constants {
+  static const token =
+      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTZiZTVjMDcwMjM3MzkzNDM5MWM5YWZiYzJkMGU5NyIsInN1YiI6IjY1NTRmMWM2ZDRmZTA0MDBjNDIxYzhhNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4RvoNtvEGfF-p3vzFf4bsNesjFUu6nlL0s7eOvTFV08';
+}
